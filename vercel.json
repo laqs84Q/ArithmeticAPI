@@ -4,6 +4,13 @@
       "MONGO_URI": "mongodb://localhost:27017/arithmeticAPI",
       "REDIS_HOST": "127.0.0.1",
       "REDIS_PORT": "6379"
+    },
+    "builds": [
+    {
+      "src": "src/app.js",
+      "use": "@vercel/node"
     }
+  ]
+    
   }
   
