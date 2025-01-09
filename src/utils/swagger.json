@@ -1,0 +1,132 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Arithmetic API",
+    "description": "API for performing arithmetic operations"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "schemes": ["http"],
+  "paths": {
+    "/arithmetic": {
+      "post": {
+        "summary": "Perform arithmetic operations",
+        "description": "Accepts two numbers and an operation type to calculate the result.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Object containing the numbers and the operation type.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "number1": { 
+                  "type": "number",
+                  "example": 10
+                },
+                "number2": { 
+                  "type": "number",
+                  "example": 5
+                },
+                "operation": {
+                  "type": "string",
+                  "enum": ["add", "subtract", "multiply", "divide"],
+                  "example": "add"
+                }
+              },
+              "required": ["number1", "number2", "operation"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful calculation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { 
+                  "type": "string",
+                  "example": "success"
+                },
+                "operation": { 
+                  "type": "string",
+                  "example": "add"
+                },
+                "inputs": {
+                  "type": "object",
+                  "properties": {
+                    "number1": { 
+                      "type": "number",
+                      "example": 10
+                    },
+                    "number2": { 
+                      "type": "number",
+                      "example": 5
+                    }
+                  }
+                },
+                "result": { 
+                  "type": "number",
+                  "example": 15
+                },
+                "timestamp": { 
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2025-01-08T12:34:56Z"
+                },
+                "responseTime": { 
+                  "type": "number",
+                  "example": 20
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input or bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { 
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": { 
+                  "type": "string",
+                  "example": "Invalid input: number1 and number2 must be numbers."
+                },
+                "timestamp": { 
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2025-01-08T12:34:56Z"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { 
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": { 
+                  "type": "string",
+                  "example": "An unexpected error occurred."
+                },
+                "timestamp": { 
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2025-01-08T12:34:56Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
